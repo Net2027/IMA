@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com">
+    <title>ورود به ایما | دستیار ریاضی</title>
+    <link rel="icon" href="IMA-Purple.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-2: #06b6d4;
+            --green: #059669;
+            --green-2: #10b981;
+            --bg-color: #eef2ff;
+            --card-bg: rgba(255,255,255,0.88);
+            --text-dark: #111827;
+            --text-gray: #6b7280;
+            --border-light: #e5e7eb;
+            --shadow: 0 20px 50px -12px rgba(79,70,229,.25);
+        }
+        body.dark-mode {
+            --bg-color: #0b1020;
+            --card-bg: rgba(23,30,52,0.85);
+            --text-dark: #f1f5f9;
+            --text-gray: #94a3b8;
+            --border-light: #2a3556;
+            --shadow: 0 20px 50px -12px rgba(0,0,0,.6);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', Tahoma, sans-serif; }
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: background .3s;
+        }
+        /* حباب‌های رنگی پس‌زمینه */
+        body::before, body::after {
+            content: ""; position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; z-index: 0;
+            animation: float 14s ease-in-out infinite alternate;
+        }
+        body::before { width: 340px; height: 340px; background: #6366f1; top: -90px; right: -80px; }
+        body::after  { width: 300px; height: 300px; background: #22d3ee; bottom: -80px; left: -70px; animation-delay: -6s; }
+        body.dark-mode::before, body.dark-mode::after { opacity: .28; }
+        @keyframes float { to { transform: translate(30px, 24px) scale(1.12); } }
+
+        .login-card {
+            position: relative; z-index: 1;
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+            border-radius: 24px;
+            padding: 40px 32px 28px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-light);
+            animation: rise .6s ease both;
+        }
+        @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+
+        .theme-toggle {
+            position: absolute; top: 14px; left: 14px;
+            width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid var(--border-light); background: transparent;
+            color: var(--text-gray); cursor: pointer; font-size: 1rem;
+            transition: background .2s, color .2s;
+        }
+        .theme-toggle:hover { background: rgba(99,102,241,.12); color: var(--primary); }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo-wrap {
+            width: 92px; height: 92px; margin: 0 auto 16px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 12px 28px -8px rgba(79,70,229,.55);
+            color: #fff; font-size: 2.4rem; position: relative;
+        }
+        .logo-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 10px; border-radius: 26px; background: #fff; }
+        .header h1 { font-size: 1.55rem; color: var(--text-dark); margin-bottom: 6px; font-weight: 800; }
+        .header p { color: var(--text-gray); font-size: .95rem; }
+
+        .role-btn {
+            width: 100%;
+            display: flex; align-items: center; gap: 14px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            border: none; border-radius: 16px;
+            color: #fff; text-align: right;
+            cursor: pointer;
+            transition: transform .15s, box-shadow .2s, filter .2s;
+        }
+        .role-btn .ic {
+            width: 46px; height: 46px; flex: none; border-radius: 14px;
+            background: rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+        }
+        .role-btn .tx { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+        .role-btn .tx b { font-size: 1.05rem; font-weight: 700; }
+        .role-btn .tx small { font-size: .8rem; opacity: .85; }
+        .role-btn .ar { opacity: .8; transition: transform .2s; }
+        .role-btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+        .role-btn:hover .ar { transform: translateX(-4px); }
+        .role-btn:active { transform: scale(.98); }
+        .role-btn:focus-visible { outline: 3px solid rgba(99,102,241,.5); outline-offset: 3px; }
+        .role-btn.teacher { background: linear-gradient(135deg, #4f46e5, #6366f1 55%, #06b6d4); box-shadow: 0 10px 22px -8px rgba(79,70,229,.6); }
+        .role-btn.student { background: linear-gradient(135deg, #059669, #10b981 60%, #22d3ee); box-shadow: 0 10px 22px -8px rgba(5,150,105,.55); }
+
+        .foot { text-align: center; color: var(--text-gray); font-size: .78rem; margin-top: 8px; }
+
+        @media (max-width: 420px) {
+            .login-card { padding: 34px 20px 22px; border-radius: 20px; }
+            .header h1 { font-size: 1.3rem; }
+            .logo-wrap { width: 78px; height: 78px; font-size: 2rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <button class="theme-toggle" id="themeBtn" type="button" aria-label="تغییر تم" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+
+        <div class="header">
+            <div class="logo-wrap">
+                <img src="IMA-Purple.png" alt="لوگوی ایما" onerror="this.remove()">
+                <i class="fas fa-square-root-variable" aria-hidden="true"></i>
+            </div>
+            <h1>به ایما خوش آمدید</h1>
+            <p>لطفاً نوع ورود خود را انتخاب کنید</p>
+        </div>
+
+        <button class="role-btn teacher" type="button" onclick="enter('teacher')">
+            <span class="ic"><i class="fas fa-chalkboard-teacher"></i></span>
+            <span class="tx"><b>ورود به پنل معلم</b><small>بانک فرمول، سوالات و آزمون‌ها</small></span>
+            <i class="fas fa-chevron-left ar"></i>
+        </button>
+        <button class="role-btn student" type="button" onclick="enter('student')">
+            <span class="ic"><i class="fas fa-user-graduate"></i></span>
+            <span class="tx"><b>ورود به پنل دانش‌آموز</b><small>یادگیری، تمرین و ابزارهای ریاضی</small></span>
+            <i class="fas fa-chevron-left ar"></i>
+        </button>
+
+        <p class="foot">ریاضی پایهٔ نهم</p>
+    </div>
+
+    <script>
+        // تم: از انتخاب قبلی کاربر یا تنظیم سیستم استفاده می‌شود
+        (function () {
+            var saved = null;
+            try { saved = localStorage.getItem("ima_theme"); } catch (e) {}
+            var dark = saved ? saved === "dark" : window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches;
+            applyTheme(dark);
+        })();
+        function applyTheme(dark) {
+            document.body.classList.toggle("dark-mode", dark);
+            document.getElementById("themeBtn").innerHTML = dark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        function toggleTheme() {
+            var dark = !document.body.classList.contains("dark-mode");
+            applyTheme(dark);
+            try { localStorage.setItem("ima_theme", dark ? "dark" : "light"); } catch (e) {}
+        }
+
+        function enter(role) {
+            // پاکسازی نشست‌های قدیمی
+            ["token", "access_token", "ima_token", "ima_user"].forEach(function (k) { localStorage.removeItem(k); });
+
+            if (role === "teacher") {
+                localStorage.setItem("ima_user", JSON.stringify({ username: "teacher", full_name: "معلم", role: "teacher" }));
+                window.location.href = "teacher.html";
+            } else {
+                localStorage.setItem("ima_user", JSON.stringify({ username: "student", full_name: "دانش‌آموز", role: "student" }));
+                window.location.href = "ima.html";
+            }
+        }
+    </script>
+</body>
+</html>
