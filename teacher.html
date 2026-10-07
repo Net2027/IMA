@@ -446,7 +446,8 @@
             gap: clamp(.75rem, 2vw, 1.5rem);
             padding-left: 2px;
         }
-        .formula-card { min-width: 0; }
+        .formula-grid { grid-auto-rows: max-content; }
+        .formula-card { min-width: 0; flex-shrink: 0; }
         .formula-card-header { gap: .5rem; font-size: clamp(.9rem, 3.4vw, 1rem); }
         .formula-card-header span { min-width: 0; overflow-wrap: anywhere; }
         .formula-display {
@@ -466,7 +467,8 @@
         }
         @media (max-width: 768px) {
             .formula-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
-            .formula-search-box { flex: 1 1 100%; width: 100% !important; }
+            #tab-formula-bank .card-header { flex-wrap: nowrap; }
+            .formula-search-box { flex: 0 0 auto; width: 100% !important; }
             #tab-formula-bank .card-header .icon-box { flex: none; }
         }
         @media (max-width: 520px) {
